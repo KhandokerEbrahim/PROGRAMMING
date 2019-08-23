@@ -1,0 +1,55 @@
+/// CF/755/C
+
+/// NORMAL DFS PROBLEM
+
+#include<bits/stdc++.h>
+using namespace std;
+int ara[10000];
+int n;
+int vis[10004];
+vector<int>v[10004];
+void dfs(int node)
+{
+    vis[node]=1;
+    int u;
+    for(int i=0;i<v[node].size();i++)
+    {
+        u = v[node][i];
+        if(vis[u]==0)
+        {
+            vis[u]=1;
+             dfs(u);
+        }
+
+    }
+}
+int main()
+{
+
+    int n,m;
+    cin >> n;
+    int ans=0;
+   v[0].push_back(0);
+    for(int i=1; i<=m; i++)
+    {
+        int x,y;
+        cin >>x;
+        //x--;
+        v[i].push_back(x);
+        v[x].push_back(i);
+
+    }
+    for(int i=1; i<=n; i++)
+    {
+        if(vis[i]==0)
+        {
+
+            dfs(i);
+            ans++;
+
+        }
+    }
+
+    //int ans=0;
+    cout <<ans <<endl;
+}
